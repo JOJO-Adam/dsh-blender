@@ -40,6 +40,15 @@ license: MIT
 - 世界背景为纯黑且没有灯光时，默认立方体也会接近黑；
 - 先在 `smoke` 上验证，再怀疑场景。
 
+### Cycles 渲染特别慢（几分钟一张）
+
+- **现象**：EEVEE 几秒，Cycles 同分辨率要几分钟，CPU 占用却很低。
+- **原因**：macOS 的 Cycles Metal 后端每次启动都要编译 kernel；如果进程写不了 kernel 缓存，就会**每次重编译**。
+- **处置**：
+  - 迭代阶段用 EEVEE；
+  - 小场景/定稿可用 `--device CPU`（简单场景反而快）；
+  - 需要 GPU 时，让 Blender 在可写缓存的环境里跑，或接受首轮编译成本。
+
 ### 输出目录无权限
 
 - 错误形如 `Permission denied` / `Operation not permitted` 写 PNG；

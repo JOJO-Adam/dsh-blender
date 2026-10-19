@@ -166,10 +166,24 @@ scene.render.resolution_percentage = 100
 scene.render.image_settings.file_format = 'PNG'
 scene.render.filepath = {str(out)!r}
 scene.frame_set({int(args.frame)})
-try:
-    scene.eevee.taa_render_samples = {int(args.samples)}
-except Exception:
-    pass
+
+if {args.engine!r} == 'CYCLES':
+    try:
+        prefs = bpy.context.preferences.addons['cycles'].preferences
+        prefs.compute_device_type = {args.device!r}
+        prefs.get_devices()
+        for device in prefs.devices:
+            device.use = device.type != 'CPU'
+        scene.cycles.device = 'CPU' if {args.device!r} == 'CPU' else 'GPU'
+    except Exception as exc:
+        print('DSH_CYCLES_WARN', exc)
+    scene.cycles.samples = {int(args.samples)}
+else:
+    try:
+        scene.eevee.taa_render_samples = {int(args.samples)}
+    except Exception:
+        pass
+
 bpy.ops.render.render(write_still=True)
 print('DSH_RENDER_OK')
 """
@@ -225,6 +239,7 @@ def main() -> int:
     p_render.add_argument("--out", required=True)
     p_render.add_argument("--engine", default="BLENDER_EEVEE")
     p_render.add_argument("--samples", type=int, default=32)
+    p_render.add_argument("--device", default="METAL", help="Cycles 计算设备：METAL / CUDA / OPTIX / CPU")
     p_render.add_argument("--res", default="512")
     p_render.add_argument("--frame", type=int, default=1)
     p_render.add_argument("--timeout", type=float, default=900)

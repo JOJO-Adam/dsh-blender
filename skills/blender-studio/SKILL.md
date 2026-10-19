@@ -51,17 +51,25 @@ python3 scripts/blender_client.py run \
 ## 4. 渲染已有工程 / 导出
 
 ```bash
-# 渲染单帧
+# EEVEE 单帧（快，适合迭代）
 python3 scripts/blender_client.py render \
   --blend outputs/blender/tiles/scene.blend \
   --out outputs/blender/tiles/final.png \
   --samples 64 --res 1024
+
+# Cycles 单帧（真实光影；macOS 用 --device METAL，小场景可先试 CPU）
+python3 scripts/blender_client.py render \
+  --blend outputs/blender/tiles/scene.blend \
+  --out outputs/blender/tiles/final_cycles.png \
+  --engine CYCLES --device METAL --samples 32 --res 512
 
 # 更复杂的导出（glTF / USD / FBX）直接在脚本里做，不要在命令行拼
 python3 scripts/blender_client.py run --script my_export.py --blend scene.blend
 ```
 
 输出统一放 `outputs/blender/<主题>/`，文件名带版本或日期；生成后用 `present` 把图片给用户看。
+
+> ⚠️ Cycles 在 macOS 上首次运行要编译 Metal kernel（可能几分钟）。如果进程写不了 kernel 缓存，每次都会重编译——迭代用 EEVEE，定稿再上 Cycles。
 
 ## 5. 领域路由
 

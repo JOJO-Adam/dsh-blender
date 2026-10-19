@@ -58,7 +58,7 @@ node test/provider.test.mjs
 python3 skills/blender-studio/scripts/blender_client.py doctor
 ```
 
-实机验证：Blender 5.2.1 LTS · macOS · METAL，EEVEE 256×256 冒烟 3.5s；参数化地砖（9 块 + 选择性 Bevel + glTF）3.6s（2026-10-19）。
+实机验证：Blender 5.2.1 LTS · macOS · METAL，EEVEE 256×256 冒烟 3.5s；参数化地砖（9 块 + 选择性 Bevel + glTF）3.6s；Cycles 256×256 / 16 采样 CPU 1.3s、Metal 首次 4–5 分钟（kernel 编译，2026-10-19）。
 
 ## 品牌
 
