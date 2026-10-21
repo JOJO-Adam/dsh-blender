@@ -1,13 +1,14 @@
 {
   "name": "@jojonadam/dsh-blender",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Blender production pack for DeepSeek Harness: headless bpy runner, render/export helpers, modeling cookbook, 5.x pitfalls and procedural asset pipeline. 本地建模 · 零依赖客户端 · 5.2 LTS 校准。",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
     "./cordis.patch.yml": "./cordis.patch.yml",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
   },
   "files": [
     "lib",
@@ -15,7 +16,8 @@
     "cordis.patch.yml",
     "icon.svg",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "locale"
   ],
   "keywords": [
     "dsh-plugin",
@@ -50,5 +52,6 @@
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
-  }
+  },
+  "icon": "icon.svg"
 }

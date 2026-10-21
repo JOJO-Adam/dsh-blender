@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DSH Blender 生产包",
+    "description": "Blender 生产包：headless bpy runner、渲染导出、建模手册与 5.x 踩坑。"
+  }
+}
