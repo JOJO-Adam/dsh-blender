@@ -17,7 +17,7 @@ apply({
 })
 
 const list = await registered.list()
-assert.equal(list.length, 7, `expected 7 skills, got ${list.length}`)
+assert.equal(list.length, 8, `expected 8 skills, got ${list.length}`)
 
 const studio = list.find((item) => item.name === 'blender-studio')
 assert.ok(studio, 'blender-studio not discovered')
@@ -28,6 +28,12 @@ const loaded = await registered.get(studio)
 assert.ok(loaded.content.includes('Blender × DSH'))
 assert.ok(existsSync(join(studio.resourceBase.path, 'scripts/blender_client.py')))
 assert.ok(existsSync(join(studio.resourceBase.path, 'examples/make_tiles.py')))
+
+const triage = list.find((item) => item.name === 'blender-triage')
+assert.ok(triage, 'blender-triage not discovered')
+const sop = list.find((item) => item.name === 'blender-sop')
+assert.ok(existsSync(join(sop.resourceBase.path, 'templates/asset_list.md')))
+assert.ok(existsSync(join(sop.resourceBase.path, 'scripts/check_table_consistency.py')))
 
 const names = list.map((item) => item.name).sort()
 console.log(`ok — ${list.length} skills: ${names.join(', ')}`)

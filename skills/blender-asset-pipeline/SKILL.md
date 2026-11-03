@@ -1,19 +1,15 @@
 ---
 name: blender-asset-pipeline
-description: "Agent 驱动的程序化资产管线：先设计再动手，AI 写参数化 bpy 脚本 + 自检 + glTF 导出，人负责美术方向。覆盖三硬限制、Bevel 圆角、CC0 拉取、LOD 导出与连续网格反模式。"
-whenToUse: "Blender 资产管线 / 程序化生成 / 游戏资产 / glTF / LOD / 批量 时"
+description: "Agent 驱动的 Blender 程序化游戏资产管线：先设计再动手，AI 写参数化 bpy 脚本 + `look` 自检 + 导出 glTF，用户定美术方向。覆盖三硬限制、Bevel 圆角、CC0 直拉、glTF/LOD 导出、连续网格反模式。已通用化（剥离项目夹具）。"
+whenToUse: "Blender 建模 / 渲染 / 导出 / 排障 / MCP 接线 时"
 license: MIT
 ---
 
-
 # Blender 资产管线 · 设计优先的协作建模
-
-> DSH 执行层（headless 跑 Blender、渲染、导出）：见 `blender-studio` 技能。
-
 
 **先设计，再动手；代码即资产表征，用户定美术方向。**
 
-本技能把「Agent 用 Blender 建模」的圈内先进经验固化为可复用流程。核心思想来自 LL3M（arXiv 2508，把 3D 生成重定义为写可解释 bpy 代码）、AAA Blender Modeling Playbook（参数化优先 + 精修循环）、StraySpark（数百小时实战的三条硬限制）。**本版已通用化**：剥离了原 Seele 小岛项目的 6×6 演示夹具、TYPE_MAP/HEIGHT_MAP 硬编码、Godot 侧上色段落与项目红线，仅保留可复用的技法与纪律。
+本技能把「Agent 用 Blender 建模」的圈内先进经验固化为可复用流程。核心思想来自 LL3M（arXiv:2508.08228，Lu 等，2025——把 3D 生成重定义为写可解释的 bpy 代码）、AAA Blender Modeling Playbook（参数化优先 + 精修循环）、行业实践中的三条硬限制。**本版已通用化**：剥离了某商业项目的 6×6 演示夹具、TYPE_MAP/HEIGHT_MAP 硬编码、下游引擎侧上色段落与项目红线，仅保留可复用的技法与纪律。
 
 ## 适用场景
 
@@ -34,7 +30,7 @@ license: MIT
 - **Spec 表锚定数值**：尺寸（如 1×1 grid 单位）、三角预算（tile ≤ 200、树 ≤ 1500）、配色、pivot。数值写死 → agent 行为确定、可复现。
 - **参数化 > 生成式 > 基元**：优先用参数化库/脚本；外部 AI 生成（`generate_3d` / Hunyuan3D）次之；纯基元 blockout 仅做占位。
 
-## 三条硬限制（必守，来自 StraySpark）
+## 三条硬限制（必守）
 
 1. **创意拓扑不是 agent 的活**：LLM 出不了生产级拓扑。agent 只出 blockout / 占位 / low-poly 代理；圆润比例、轮廓、配色由用户定。手动重拓扑/UV/绑定/动画必须人审。
 2. **重操作会超时**：细分(Subsurf)、重拓扑、纹理烘焙可能超过 MCP 工具超时（通常 60–120s）。大任务拆小步；或手动跑长任务。
@@ -47,7 +43,7 @@ license: MIT
 | A 简报+参考 | 定 1–3 张参考图 + 写 Spec 表（尺寸/三角预算/配色/pivot） | 用户给方向 | Spec 表 |
 | B 参数化构建 | bpy + Bevel 生成 low-poly，或 `generate_3d` 拉云端模型进来精修 | agent | .blend |
 | C 截图检视 | `look` 渲 turntable/接触表，对照 Spec 自检 3 个最高影响问题 | agent | 截图+缺陷清单 |
-| D 导出 | glb → 资产目录，apply transform + 可选 Decimate LOD | agent | .glb（几何-only） |
+| D 导出 | glb → 资产目录，apply transform + 顶点色接进材质 + 可选 Decimate LOD | agent | .glb |
 | E 引擎实测 | 引擎内替换占位、跑场景看比例/锚点/视觉 | 用户+agent | 修订项 |
 
 > ⚠️ 工具名对齐 mcp-for-blender：阶段 C 用 `look`（非旧版 `get_viewport_screenshot`）；阶段 B 云端造模用 `generate_3d`（非旧版 `generate_hyper3d_model`）；CC0 直拉用 `search_assets`（非旧版 `get_polyhaven_assets`）。
@@ -86,15 +82,15 @@ license: MIT
 - 判竖直棱：两顶点 `abs(x1-x2)<eps and abs(y1-y2)<eps`（忽略 z 差）→ 竖直；其 `xs=sign(x-中心x)`、`ys=sign(y-中心y)` 决定属于哪侧。
 
 ### 导出坑（已修）
-- **Blender 5.2 glTF 色导出 bug**：顶点色→白色 `COLOR_0`(ubyte)+畸形 `COLOR_1`(ushort)；纯色材质→无 `pbrMetallicRoughness`。**对策：GLB 只出几何，颜色全在下游引擎（Godot/Maya/Unity）侧套** `StandardMaterial3D` / PBR。不要在 Blender 侧烤色。
+- **Blender 5.2 glTF 顶点色降位**：默认导出时顶点色变 `COLOR_0`(ubyte) + 多出畸形 `COLOR_1`(ushort)。根因＝顶点色**没被材质节点树引用**。**对策：把顶点色接进材质（`ShaderNodeVertexColor` → Base Color）或 `export_vertex_color='ACTIVE'`**；下游要精确控色时，仍可「GLB 只出几何、颜色在下游引擎侧套」。纯色材质 `pbrMetallicRoughness` 实测正常。
 - bmesh 跨会话 bevel 报 `BMEdge has been removed` → 选中+bevel+to_mesh+free 必须在**单 bmesh 会话内**完成。
 - 过渡名无拓扑后缀互相覆盖 → 加 `_inland/_side/_corner` 后缀区分。
 
 ## 连接与工具（mcp-for-blender）
 
-- MCP 配置：`~/.workbuddy/mcp.json` 的 `blender` 节点（`command: uvx blender-mcp`, `BLENDER_PORT=9876`）。
-- 插件：`~/Library/Application Support/Blender/5.2/scripts/addons/blender_mcp_addon.py`（Blender 内 Edit→Preferences→Add-ons 启用 "Blender MCP"，N 面板 BlenderMCP → Start MCP Server）。
-- **可复用 helper**：`/Users/jojo/AI_Projects/Seele/tools/blender_mcp_exec.py` — 读 .py 脚本或 stdin，经 `uvx blender-mcp` 桥在 Blender 内执行并返回输出：`python3 blender_mcp_exec.py script.py`（需 Blender 已开 + 插件服务端已启动）。
+- MCP 配置：`~/.workbuddy/mcp.json` 的 `blender` 节点（`command: uvx mcp-for-blender`, `BLENDER_PORT=9876`）。
+- 插件：`uvx mcp-for-blender install-addon` 自动装到 Blender 的 addons 目录（`uvx mcp-for-blender addon-paths` 可查实际路径）→ Blender 内 Preferences → Add-ons 启用 `Interface: MCP for Blender` → N 面板点 Start MCP Server。
+- **可复用 helper**：`scripts/blender_mcp_exec.py` — 读 .py 脚本或 stdin，经 `uvx mcp-for-blender` 桥在 Blender 内执行并返回输出：`python3 scripts/blender_mcp_exec.py script.py`（需 Blender 已开 + 插件服务端已启动）。
 - 视觉自检：`look`（rendered 通道，返回场景渲图）替代旧 `get_viewport_screenshot`。
 
 ## CC0 素材直拉（mcp-for-blender 内集成）
@@ -111,3 +107,13 @@ license: MIT
 - 新资产类别（树/屋/角色）沉淀为可复用 bpy 函数片段，附在本技能或独立参考文件。
 - 用户美术方向偏好（配色、轮廓、圆角强度）→ 记入 Spec 表默认模板。
 - 不擅自推翻 `blender-sop` 级红线；涉及决策变更先与主理人（艾芙琳）对齐。
+
+## 无 Blender 时的资产交付
+
+连不上 MCP、或买家还没装 Blender 时，**资产管线照样能交**：
+
+- 按 `templates/asset_list.md` 填资产清单（类型用 `SM_` / `ENV_` / `CH_` 三档，别自造）
+- 按 `templates/naming_export.md` 定前缀与 **glTF 导出参数**（+Y up、米、三角化、切线、是否含动画）
+- 交付的是**建模的人能照着开工**的清单，不是"听起来专业"的描述
+
+**不许只回「请先安装 Blender」。** 先给清单，再谈建模。

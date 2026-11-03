@@ -1,15 +1,11 @@
 ---
 name: blender-modeling-cookbook
-description: "Blender 建模技法库：参数化 bpy 构建、BMesh 操作、修改器栈、拓扑规则、UV 展开，以及让 low-poly 资产圆润的选择性 Bevel 配方。"
-whenToUse: "Blender 建模 / bpy / BMesh / 修改器 / 拓扑 / UV / Bevel 时"
+description: "Blender 建模技法库：参数化 bpy 构建、BMesh 操作、修改器栈、拓扑规则、UV 展开、选择性 Bevel 配方（圆润 low-poly 来源）。锚定 5.2 LTS。"
+whenToUse: "Blender 建模 / 渲染 / 导出 / 排障 / MCP 接线 时"
 license: MIT
 ---
 
-
 # 建模技法库（blender-modeling-cookbook）
-
-> DSH 执行层（headless 跑 Blender、渲染、导出）：见 `blender-studio` 技能。
-
 
 **沉淀实战建模技法，供 `blender-modeling` 与全员复用。** 锚定 Blender 5.2 LTS；语法不假设 4.x。
 
@@ -49,7 +45,7 @@ license: MIT
 
 - **连续网格优于逐立方体**：地面/地形用一整张 heightfield，顶点色 splat 只在边界带、块中心纯色 → 无缝、色不糊。逐立方体各自顶点色无法跨 mesh 衔接（缝 + 色糊反模式）。
 - **低模代理**：quad 优先、拓扑干净、三角预算写死（tile ≤ 200、树 ≤ 1500）。
-- **重拓扑/UV/绑定必须人审**（StraySpark 硬限制 #1）。
+- **重拓扑/UV/绑定必须人审**（三硬限制 #1）。
 
 ## §5 UV 展开
 
@@ -59,10 +55,20 @@ license: MIT
 ## §6 LOD 与导出
 
 - Decimate 生成 LOD（LOD1=50% / LOD2=75% / LOD3=90% 缩减）。
-- glTF/GLB 只出几何（5.2 丢色），颜色下游引擎套（见 `blender-5x-pitfalls` / `blender-sop` §4）。
+- 顶点色须接进材质再导出（否则 `COLOR_0` 降为 ubyte），见 `blender-5x-pitfalls` 致命级 3 / `blender-sop` §4。
 
 ## §7 复用资产
 
 - `generate_3d`（tripo/hunyuan3d/hyper3d）云端造模独有道具 → 进 Blender 精修。
 - `search_assets` 直拉 Poly Pizza CC0 low-poly 作基线，对齐视觉语言后参数化自研。
-- helper：`/Users/jojo/AI_Projects/Seele/tools/blender_mcp_exec.py` 本地执行 bpy 脚本。
+- helper：`scripts/blender_mcp_exec.py` 本地执行 bpy 脚本。
+
+## 无 Blender 时的参数交付
+
+建模跑不了，**参数照样必须给全** —— 按 `templates/model_spec.md` 填：
+
+- 尺寸（X×Y×Z，米）、三角面上限、UV 通道数、材质槽数、LOD 级数
+- 全局约定写死：+Y up 导出、变换必须应用、导出前三角化
+- 材质与贴图：贴图尺寸、是否共用图集、**移动端尽量不用 Alpha Blend**
+
+**参数给到能被照着做**，而不是"这个模型大概八百面左右"。

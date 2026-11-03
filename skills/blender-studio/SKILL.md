@@ -76,11 +76,20 @@ python3 scripts/blender_client.py run --script my_export.py --blend scene.blend
 | 用户问题 | 调用技能 |
 |---|---|
 | 找不到 Blender / 版本不对 / 渲染报错 | `blender-env` |
-| 渲染器怎么选、导出规范、CC0 红线 | `blender-sop` |
+| 「渲染出来是黑的 / 导不出去 / 卡住」这类**症状** | `blender-triage`（按现象查，先定位再修） |
+| 渲染器怎么选、导出规范、CC0 红线、交付纪律 | `blender-sop` |
 | 建模、Bevel、修改器、拓扑、UV | `blender-modeling-cookbook` |
 | 5.x 的 API 变化与已知坑 | `blender-5x-pitfalls` |
 | 程序化资产生成、批量、LOD、glTF | `blender-asset-pipeline` |
 | 要实时操控打开着的 Blender | `blender-mcp-bridge` |
+
+## 5.1 交付前三条硬纪律（来自实机测试失分点，对应专家团 v1.3.6）
+
+1. **四个数字先锁死**：资产名 / 尺寸（米）/ 面数预算（目标+上限）/ 导出格式。多产物并行时先写进 asset_list 再动手；任一处想偏离先停下问，不许自改。
+2. **跨表咬合要跑出来**：`python3 skills/blender-sop/scripts/check_table_consistency.py <表A> <表B>`——exit 0 且无输出才算咬合；有输出就按行号改到一致或标「待拍板」。没跑过禁止说「基本一致」。
+3. **命令输出要落盘**：审计/验证类命令的输出重定向到文件（`> audit.log 2>&1`），正文只报「做了什么 + 产物路径」，不拿转述当证据。
+
+四份交付表（asset_list / model_spec / naming_export / delivery_checklist）与两份工序单（uv_unwrap / lighting_exposure）在 `skills/blender-sop/templates/`——不打开 Blender 也能填完交付。
 
 ## 6. 诚实边界
 

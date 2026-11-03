@@ -43,6 +43,13 @@ python3 skills/blender-studio/scripts/blender_client.py run \
 | `blender-5x-pitfalls` | 5.x 的 API 变更与已知坑 |
 | `blender-asset-pipeline` | 程序化资产、批量、LOD、glTF 导出、连续网格反模式 |
 | `blender-mcp-bridge` | 需要实时操控打开着的 Blender 时接 MCP |
+| `blender-triage` | 按症状排障：渲染黑图、导不出去、卡住、材质不对，附「做不到什么」清单 |
+
+另带三样交付工具：
+
+- **6 份表格与工序单**（`blender-sop/templates/`）：资产清单、建模参数、命名导出、交付检查、UV 展开、布光曝光——不开 Blender 也能填完交付。
+- **跨表咬合检查器**（`blender-sop/scripts/check_table_consistency.py`）：七字段逐项对表，矛盾带行号；自带 `--selftest` 反向验证。
+- **MCP 执行器**（`blender-mcp-bridge/scripts/blender_mcp_exec.py`）：对运行中的 Blender 执行任意 bpy 代码，输出可重定向落盘。
 
 ## 设计边界
 
