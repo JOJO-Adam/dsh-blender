@@ -1,5 +1,8 @@
 # dsh-blender · JOJO&Adam
 
+> English: [README.en.md](README.en.md)
+
+
 Blender 在 DeepSeek Harness 里的生产包：headless 跑 bpy 脚本、渲染、导出 glTF，外加建模技法、5.x 踩坑和程序化资产管线。
 
 不是“教你怎么点 Blender”，是让 agent 真的能把场景建出来、渲染出来、导出成游戏资产。
