@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2 — 2026-11-12
+
+- 新增 3 个开箱即用的资产配方：低模木箱 / 低模树 / 发光路灯（`skills/blender-studio/examples/recipes/`），每个输出 png + blend + glb。
+- README 增加真实渲染画廊（Hero、地砖、三个配方）；关键词补充 low-poly / game-assets / asset-recipes。
+- 修复 `blender_client.py run` 不把脚本异常当失败：加 `--python-exit-code 1`，脚本报错现在退出码 4（此前误报"执行完成"）。
+- 配方脚本支持 `DSH_BLENDER_OUTDIR`，与 `blender_client.py run --outdir` 对齐。
+
 ## 0.2.1 — 2026-11-12
 
 - 补英文 README（README.en.md）与版本历史；无功能变更。

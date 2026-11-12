@@ -4,6 +4,22 @@ A production pack that lets a DeepSeek Harness agent actually drive Blender: hea
 
 This is not “how to click around in Blender” — it is how to make the agent build a scene, render it and export a game-ready asset.
 
+## Results (real renders, not mockups)
+
+| Hero scene | Parametric tiles |
+|---|---|
+| ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-hero.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-hero.png) | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-tiles.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-tiles.png) |
+
+## Asset recipes (ready to run, edit the parameters)
+
+| Recipe | Script | Preview |
+|---|---|---|
+| Low-poly crate | `skills/blender-studio/examples/recipes/crate.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/crate.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/crate.png) |
+| Low-poly tree | `skills/blender-studio/examples/recipes/tree.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/tree.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/tree.png) |
+| Street lamp (emissive) | `skills/blender-studio/examples/recipes/lamp.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png) |
+
+Each recipe is a standalone `bpy` script: a few parameters at the top, one run produces `png + blend + glb`.
+
 ## Install
 
 ```bash

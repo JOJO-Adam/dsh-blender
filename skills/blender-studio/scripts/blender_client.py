@@ -109,7 +109,7 @@ def resolution(value: str) -> tuple[int, int]:
 def run_python_script(blender: str, script_path: Path, blend: str | None, timeout: float, extra: list[str]) -> subprocess.CompletedProcess:
     cmd = [blender, "-b"]
     cmd += [blend] if blend else ["--factory-startup"]
-    cmd += ["--python", str(script_path)]
+    cmd += ["--python-exit-code", "1", "--python", str(script_path)]
     if extra:
         cmd += ["--"] + extra
     return run_blender(cmd, timeout)

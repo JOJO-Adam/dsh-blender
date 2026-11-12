@@ -7,6 +7,28 @@ Blender 在 DeepSeek Harness 里的生产包：headless 跑 bpy 脚本、渲染�
 
 不是“教你怎么点 Blender”，是让 agent 真的能把场景建出来、渲染出来、导出成游戏资产。
 
+## 效果（全部真实渲染，非示意图）
+
+| Hero 场景 | 参数化地砖 |
+|---|---|
+| ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-hero.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-hero.png) | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-tiles.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-tiles.png) |
+
+## 资产配方（开箱即用，改参数即可）
+
+| 配方 | 脚本 | 效果 |
+|---|---|---|
+| 低模木箱 | `skills/blender-studio/examples/recipes/crate.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/crate.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/crate.png) |
+| 低模树 | `skills/blender-studio/examples/recipes/tree.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/tree.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/tree.png) |
+| 路灯（发光） | `skills/blender-studio/examples/recipes/lamp.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png) |
+
+每个配方都是一份独立的 `bpy` 脚本：顶部几个参数（尺寸/颜色/段数），跑一次就得到 `png + blend + glb`。
+
+```bash
+python3 skills/blender-studio/scripts/blender_client.py run \
+  --script skills/blender-studio/examples/recipes/crate.py \
+  --outdir outputs/blender/crate
+```
+
 ## 安装
 
 ```bash

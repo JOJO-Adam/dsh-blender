@@ -1,7 +1,7 @@
 {
   "name": "@jojonadam/dsh-blender",
-  "version": "0.2.1",
-  "description": "Blender production pack for DeepSeek Harness: headless bpy runner, render/export helpers, modeling cookbook, 5.x pitfalls, procedural asset pipeline, symptom-first triage, and delivery checklists with a cross-table consistency checker.",
+  "version": "0.2.2",
+  "description": "Blender production pack for DeepSeek Harness: headless bpy runner, ready-to-run low-poly asset recipes (crate/tree/lamp), render/export helpers, modeling cookbook, 5.x pitfalls and procedural asset pipeline.",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -21,12 +21,17 @@
     "README.en.md"
   ],
   "keywords": [
-    "dsh-plugin",
-    "deepseek-harness",
+    "3d",
+    "asset-recipes",
     "blender",
     "bpy",
-    "3d",
+    "deepseek-harness",
+    "dsh-plugin",
+    "eevee",
+    "game-assets",
     "gltf",
+    "low-poly",
+    "procedural",
     "procedural-assets"
   ],
   "license": "MIT",
