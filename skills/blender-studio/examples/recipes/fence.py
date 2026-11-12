@@ -54,11 +54,11 @@ for loc, energy, size in [((3.2, -3.6, 3.4), 160, 2.5), ((-3.2, -1.8, 2.4), 80, 
     bpy.context.object.data.energy = energy
     bpy.context.object.data.size = size
 
-bpy.ops.object.camera_add(location=(2.4, -5.0, 2.3))
+bpy.ops.object.camera_add(location=(3.4, -5.8, 2.5))
 cam = bpy.context.object
 target = Vector((0, 0, 0.55))
 cam.rotation_euler = (target - cam.location).to_track_quat('-Z', 'Y').to_euler()
-cam.data.lens = 45
+cam.data.lens = 40
 bpy.context.scene.camera = cam
 
 sc = bpy.context.scene
