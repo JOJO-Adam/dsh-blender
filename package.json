@@ -1,6 +1,6 @@
 {
   "name": "@jojonadam/dsh-blender",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Blender production pack for DeepSeek Harness: headless bpy runner, ready-to-run low-poly asset recipes (crate/tree/lamp), render/export helpers, modeling cookbook, 5.x pitfalls and procedural asset pipeline.",
   "type": "module",
   "main": "lib/index.js",

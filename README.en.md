@@ -10,13 +10,22 @@ This is not “how to click around in Blender” — it is how to make the agent
 |---|---|
 | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-hero.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-hero.png) | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-tiles.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-tiles.png) |
 
-## Asset recipes (ready to run, edit the parameters)
+## Asset recipes (12 ready to run, edit the parameters)
 
 | Recipe | Script | Preview |
 |---|---|---|
 | Low-poly crate | `skills/blender-studio/examples/recipes/crate.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/crate.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/crate.png) |
 | Low-poly tree | `skills/blender-studio/examples/recipes/tree.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/tree.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/tree.png) |
-| Street lamp (emissive) | `skills/blender-studio/examples/recipes/lamp.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png) |
+| Street lamp | `skills/blender-studio/examples/recipes/lamp.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png) |
+| Fence | `skills/blender-studio/examples/recipes/fence.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/fence.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/fence.png) |
+| Barrel | `skills/blender-studio/examples/recipes/barrel.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/barrel.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/barrel.png) |
+| Crate stack | `skills/blender-studio/examples/recipes/stack.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/stack.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/stack.png) |
+| House | `skills/blender-studio/examples/recipes/house.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/house.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/house.png) |
+| Rock | `skills/blender-studio/examples/recipes/rock.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/rock.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/rock.png) |
+| Grass tuft | `skills/blender-studio/examples/recipes/grass.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/grass.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/grass.png) |
+| Arch | `skills/blender-studio/examples/recipes/arch.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/arch.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/arch.png) |
+| Steps | `skills/blender-studio/examples/recipes/steps.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/steps.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/steps.png) |
+| Sword | `skills/blender-studio/examples/recipes/sword.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/sword.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/sword.png) |
 
 Each recipe is a standalone `bpy` script: a few parameters at the top, one run produces `png + blend + glb`.
 

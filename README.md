@@ -13,13 +13,22 @@ Blender 在 DeepSeek Harness 里的生产包：headless 跑 bpy 脚本、渲染�
 |---|---|
 | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-hero.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-hero.png) | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-tiles.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/screenshot-tiles.png) |
 
-## 资产配方（开箱即用，改参数即可）
+## 资产配方（12 个，开箱即用，改参数即可）
 
 | 配方 | 脚本 | 效果 |
 |---|---|---|
 | 低模木箱 | `skills/blender-studio/examples/recipes/crate.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/crate.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/crate.png) |
 | 低模树 | `skills/blender-studio/examples/recipes/tree.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/tree.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/tree.png) |
 | 路灯（发光） | `skills/blender-studio/examples/recipes/lamp.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/lamp.png) |
+| 木栅栏 | `skills/blender-studio/examples/recipes/fence.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/fence.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/fence.png) |
+| 木桶 | `skills/blender-studio/examples/recipes/barrel.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/barrel.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/barrel.png) |
+| 箱子堆 | `skills/blender-studio/examples/recipes/stack.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/stack.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/stack.png) |
+| 小屋 | `skills/blender-studio/examples/recipes/house.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/house.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/house.png) |
+| 石头 | `skills/blender-studio/examples/recipes/rock.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/rock.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/rock.png) |
+| 草丛 | `skills/blender-studio/examples/recipes/grass.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/grass.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/grass.png) |
+| 拱门 | `skills/blender-studio/examples/recipes/arch.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/arch.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/arch.png) |
+| 台阶 | `skills/blender-studio/examples/recipes/steps.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/steps.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/steps.png) |
+| 道具剑 | `skills/blender-studio/examples/recipes/sword.py` | ![https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/sword.png](https://raw.githubusercontent.com/JOJO-Adam/dsh-blender/main/assets/recipes/sword.png) |
 
 每个配方都是一份独立的 `bpy` 脚本：顶部几个参数（尺寸/颜色/段数），跑一次就得到 `png + blend + glb`。
 
